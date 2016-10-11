@@ -1,0 +1,62 @@
+{% set name = "bmi-babel" %}
+{% set version = "0.1.0" %}
+{% set build_string = environ.get('GIT_BUILD_STR', '') %}
+
+package:
+  name: {{ name }}
+  version: {{ version }}
+
+source:
+  git_url: https://github.com/bmi-forum/bmi-babel
+
+requirements:
+  build:
+    - python
+    - setuptools
+    - pyyaml
+    - nose
+    - cca-bocca
+    - pexpect
+    - conda-build
+
+  run:
+    - python
+    - setuptools
+    - pyyaml
+    - nose
+    - cca-bocca
+    - pkgconfig-command [osx]
+    - pexpect
+    - scripting
+    - conda-build
+
+test:
+  imports:
+    - bmibabel
+  commands:
+    - bmi-find -h
+    - bmi-babelize -h
+    - bmi-parameters -h
+    - bmi-files -h
+    - bmi-stage -h
+    - bmi-install -h
+    - bmi -h
+  requires:
+    - cmake
+    - pymt
+
+about:
+  summary: Generate BMI language bindings with babel.
+
+build:
+  number: 0
+  script: python setup.py install --single-version-externally-managed --record record.txt
+  entry_points:
+    - bmi-find=bmibabel.cmd.bmi_find:main
+    - bmi-babelize=bmibabel.cmd.bmi_babelize:main
+    - bmi-parameters=bmibabel.cmd.bmi_parameters:main
+    - bmi-files=bmibabel.cmd.bmi_files:main
+    - bmi-stage=bmibabel.cmd.bmi_stage:main
+    - bmi-install=bmibabel.cmd.bmi_install:main
+    - bmi=bmibabel.cmd.bmi:main
+  preserve_egg_dir: True
