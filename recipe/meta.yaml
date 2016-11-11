@@ -26,7 +26,6 @@ requirements:
     - nose
     - cca-bocca
     - pkg-config [osx]
-    - pkgconfig
     - pexpect
     - scripting
     - conda-build
