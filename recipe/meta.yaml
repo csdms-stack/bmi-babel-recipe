@@ -25,7 +25,8 @@ requirements:
     - pyyaml
     - nose
     - cca-bocca
-    - pkg-config
+    - pkg-config [osx]
+    - pkgconfig
     - pexpect
     - scripting
     - conda-build
